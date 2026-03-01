@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Domine&display=swap');
+            @import url('https://fonts.googleapis.com/css2?family=Domine:wght@700&display=swap');
+
+            #canvas {
+                width: 80vw;
+                height: 41vh;
+                margin-top: 15vh;
+            }
+
+            html {
+                height: 100%;
+            }
+
+            body {
+                margin: 0;
+                background-color: white;
+
+                font-family: 'Domine', serif;
+                font-optical-sizing: auto;
+                font-weight: 400;
+                font-style: normal;
+
+                display: flex;
+                flex-direction: column;
+                height: 100%;
+            }
+
+            .c-container {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+            }
+
+            .content {
+                width: 20%;
+                text-align: center;
+                > * {
+                    width: 100%;
+                }
+            }
+
+            #title {
+                font-family: 'Domine', serif;
+                font-optical-sizing: auto;
+                font-weight: 700;
+                font-style: normal;
+                font-size: large;
+            }
+
+            #review {
+                font-size: small;
+                line-height: 1;
+            }
+
+            #rating {
+                font-size: large;
+                padding-bottom: 5px;
+            }
+
+            .name-c {
+                justify-content: center;
+                width: 100%;
+                display: flex;
+                height: 100%;
+            }
+
+            .name {
+                display: inline-block;
+                align-self: flex-end;
+                font-size: small;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="c-container">
+            <canvas id="canvas"></canvas>
+        </div>
+
+        <div class="c-container">
+            <div class="content">
+                <div id="title"></div>
+                <div id="rating"></div>
+                <div id="review"></div>
+            </div>
+        </div>
+
+        <div class="name-c">
+            <p class="name">Varshith's Movie Diary</p>
+        </div>
+        <script src="script.js" type="module"></script>
+    </body>
+</html>
