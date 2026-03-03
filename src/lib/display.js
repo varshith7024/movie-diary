@@ -1,6 +1,7 @@
 import { getMovies } from './data.js';
 
-let movies = getMovies();
+let movies = await getMovies();
+console.log(movies.length);
 
 let canvas = document.getElementById('canvas');
 let ctx = canvas.getContext('2d');
@@ -13,16 +14,23 @@ canvas.height = height;
 function getSlice(items, index, sliceLength) {
     let arr = [];
     let count = 0;
-    for (let i = index; i < sliceLength; i++) {
+    for (let i = index; i < items.length; i++) {
         arr.push(items[i]);
         count++;
+        if (count == sliceLength) {
+            break;
+        }
     }
 
+    let count2 = 0;
     if (count < sliceLength) {
         for (let i = 0; i < sliceLength - count; i++) {
             arr.push(items[i]);
+            count2++;
         }
     }
+
+    console.log(arr.length);
     return arr;
 }
 
@@ -30,7 +38,11 @@ async function prepareImages(items) {
     let arr = [];
     for (let i = 0; i < items.length; i++) {
         let img = new Image();
-        img.src = items[i].imgSrc;
+
+        let poster = items[i].imgSrc;
+        let proxy = `/api/proxy-image?url=${encodeURIComponent(poster)}`;
+
+        img.src = proxy;
         await img.decode();
         arr.push(img);
     }
@@ -111,14 +123,13 @@ console.log('loaded');
 
 let index = 0;
 let sliceLength = 9;
-console.log(getSlice(images, index, sliceLength));
 drawToCanvas(getSlice(images, index, sliceLength));
 modifyText(getSlice(movies, index, sliceLength)[Math.floor(sliceLength / 2)]);
 
 addEventListener('keydown', (event) => {
     if (event.key === 'ArrowLeft') {
         index += 1;
-        if (index == sliceLength) {
+        if (index == movies.length) {
             index = 0;
         }
         drawToCanvas(getSlice(images, index, sliceLength));
@@ -129,12 +140,11 @@ addEventListener('keydown', (event) => {
     if (event.key === 'ArrowRight') {
         index -= 1;
         if (index < 0) {
-            index = sliceLength - 1;
+            index = movies.length - 1;
         }
         drawToCanvas(getSlice(images, index, sliceLength));
         modifyText(
             getSlice(movies, index, sliceLength)[Math.floor(sliceLength / 2)],
         );
     }
-    console.log(index);
 });
