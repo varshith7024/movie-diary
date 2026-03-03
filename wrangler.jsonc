@@ -1,28 +1,33 @@
 {
-	"$schema": "node_modules/wrangler/config-schema.json",
-	"name": "movie-diary",
-	"main": "src/lib/backend.js",
-	"compatibility_date": "2025-09-27",
-	"observability": {
-		"enabled": true,
-	},
-	"assets": {
-		"directory": "src",
-	},
-	"compatibility_flags": [
-		"nodejs_compat"
-	],
-	"d1_databases": [
-		{
-			"binding": "DB",
-			"database_name": "movie-diary-db",
-			"database_id": "3d697da7-bc0b-43cd-9fcb-9ed37c03a074",
-		},
-	],
-	"r2_buckets": [
-		{
-			"bucket_name": "movie-posters",
-			"binding": "movie_posters"
-		}
-	],
+    "$schema": "node_modules/wrangler/config-schema.json",
+    "name": "movie-diary",
+    "main": "src/lib/backend.js",
+    "compatibility_date": "2026-03-03",
+    "observability": {
+        "enabled": true,
+    },
+    "assets": {
+        "directory": "src",
+    },
+    "compatibility_flags": ["nodejs_compat"],
+    "d1_databases": [
+        {
+            "binding": "DB",
+            "database_name": "movie-diary-db",
+            "database_id": "3d697da7-bc0b-43cd-9fcb-9ed37c03a074",
+        },
+    ],
+    "r2_buckets": [
+        {
+            "bucket_name": "movie-posters",
+            "binding": "movie_posters",
+        },
+    ],
+    "rules": [
+        {
+            "type": "CompiledWasm",
+            "globs": ["**/*.wasm"],
+            "fallthrough": true,
+        },
+    ],
 }

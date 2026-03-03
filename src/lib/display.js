@@ -22,15 +22,12 @@ function getSlice(items, index, sliceLength) {
         }
     }
 
-    let count2 = 0;
     if (count < sliceLength) {
         for (let i = 0; i < sliceLength - count; i++) {
             arr.push(items[i]);
-            count2++;
         }
     }
 
-    console.log(arr.length);
     return arr;
 }
 
@@ -102,6 +99,8 @@ async function drawToCanvas(images) {
         center_width,
         center_height,
     );
+
+    console.log(center_width, center_height);
 }
 
 async function modifyText(movie) {

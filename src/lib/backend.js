@@ -1,3 +1,5 @@
+import { PhotonImage, SamplingFilter, resize } from '@cf-wasm/photon/workerd';
+
 export default {
     async fetch(request, env, ctx) {
         const url = new URL(request.url);
@@ -40,14 +42,24 @@ export default {
             }
 
             let res = await fetch(target);
-
             if (!res.ok) {
                 return new Response('Failed to fetch', {
                     status: res.status,
                 });
             }
 
-            await env.movie_posters.put(target, res.body);
+            res = await res.arrayBuffer();
+            res = new Uint8Array(res);
+
+            const input = PhotonImage.new_from_byteslice(res);
+
+            const output = resize(input, 200, 300, SamplingFilter.Nearest);
+
+            let outputBytes = output.get_bytes_webp();
+            input.free();
+            output.free();
+
+            await env.movie_posters.put(target, outputBytes);
 
             return new Response('Successfully added', { status: 200 });
         }

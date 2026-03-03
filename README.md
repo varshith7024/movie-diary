@@ -6,13 +6,11 @@ inspiration: https://www.landing.love/sites/voku/
 
 ### frontend
 
-animations
+animations  
+loading screen
 
 ### backend
 
-store data  
-find a way to write data
-
-- cloudflare workers, cdn, kv,
+improve r2 performance - resize image
 
 https://theposterdb.com/
