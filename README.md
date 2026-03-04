@@ -7,10 +7,9 @@ inspiration: https://www.landing.love/sites/voku/
 ### frontend
 
 animations  
-loading screen
+loading screen  
+ui + auth for write.html
 
 ### backend
-
-improve r2 performance - resize image
 
 https://theposterdb.com/
