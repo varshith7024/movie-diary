@@ -2,8 +2,6 @@ async function getMovies() {
     let response = await fetch('/api/get-movies');
     response = await response.json();
 
-    console.log(response);
-
     let movies = [];
     for (let i = 0; i < response.length; i++) {
         let movie = {};

@@ -6,9 +6,7 @@ inspiration: https://www.landing.love/sites/voku/
 
 ### frontend
 
-animations  
-loading screen  
-ui + auth for write.html
+animations
 
 ### backend
 

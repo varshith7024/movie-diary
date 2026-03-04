@@ -26,14 +26,12 @@ export default {
                 ).all();
                 return Response.json(results);
             } catch (error) {
-                console.log(error.message);
                 return new Response(error.message, { status: 500 });
             }
         }
 
         if (url.pathname === '/api/proxy-image') {
             const target = url.searchParams.get('url');
-            console.log(target);
 
             const object = await env.movie_posters.get(target);
 
@@ -41,18 +39,15 @@ export default {
                 return new Response('image not found', { status: 404 });
             }
 
-            console.log('Poster retrieved from R2 bucket');
             return new Response(object.body);
         }
 
         if (url.pathname === '/api/add-image') {
             const target = url.searchParams.get('url');
-            console.log(target);
 
             const object = await env.movie_posters.get(target);
 
             if (object !== null) {
-                console.log(JSON.stringify(object));
                 return new Response('Already Added', { status: 200 });
             }
 
@@ -72,7 +67,6 @@ export default {
 
         if (url.pathname === '/api/delete-image') {
             const target = url.searchParams.get('url');
-            console.log(target);
 
             await env.movie_posters.delete(target);
 
@@ -84,8 +78,6 @@ export default {
             let rating = url.searchParams.get('rating');
             let review = url.searchParams.get('review');
             let poster = url.searchParams.get('poster');
-
-            console.log(poster);
 
             let res = await fetch(poster);
             if (!res.ok) {
@@ -104,7 +96,6 @@ export default {
                 ).all();
                 return Response.json(results);
             } catch (error) {
-                console.log(error.message);
                 return new Response(error.message, { status: 500 });
             }
         }

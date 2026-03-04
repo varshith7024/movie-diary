@@ -5,8 +5,6 @@ async function addExisting() {
     for (let i = 0; i < body.length; i++) {
         let url = `/api/add-image?url=${encodeURIComponent(body[i].poster)}`;
         let res2 = await fetch(url);
-
-        console.log(await res2.text());
     }
 }
 
@@ -17,8 +15,6 @@ async function deleteExisting() {
     for (let i = 0; i < body.length; i++) {
         let url = `/api/delete-image?url=${encodeURIComponent(body[i].poster)}`;
         let res2 = await fetch(url);
-
-        console.log(await res2.text());
     }
 }
 
@@ -29,14 +25,10 @@ async function addNew() {
     let poster = document.getElementById('poster').value;
 
     let posterUrl = `/api/add-image?url=${encodeURIComponent(poster)}`;
-    let posterRes = await fetch(posterUrl);
-
-    console.log(await posterRes.text());
+    await fetch(posterUrl);
 
     let url = `/api/add-movie?poster=${encodeURIComponent(poster)}&rating=${rating}&review=${review}&title=${title}`;
-    let res = await fetch(url);
-
-    console.log(await res.text());
+    await fetch(url);
 }
 
 let addButton = document.getElementById('add');

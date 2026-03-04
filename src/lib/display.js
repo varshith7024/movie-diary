@@ -1,7 +1,12 @@
 import { getMovies } from './data.js';
 
+let loading = document.getElementById('loading-text');
+
+const t1 = performance.now();
 let movies = await getMovies();
-console.log(movies.length);
+const t2 = performance.now();
+console.log(`Movies loaded in ${Math.floor(t2 - t1)}ms`);
+loading.innerHTML = `Posters Loading: 0/${movies.length} Complete`;
 
 let canvas = document.getElementById('canvas');
 let ctx = canvas.getContext('2d');
@@ -33,6 +38,8 @@ function getSlice(items, index, sliceLength) {
 
 async function prepareImages(items) {
     let arr = [];
+    let loading = document.getElementById('loading-text');
+
     for (let i = 0; i < items.length; i++) {
         let img = new Image();
 
@@ -42,7 +49,9 @@ async function prepareImages(items) {
         img.src = proxy;
         await img.decode();
         arr.push(img);
+        loading.innerText = `Posters Loading: ${i + 1}/${items.length} Complete`;
     }
+    document.getElementById('loading').style.opacity = 0;
     return arr;
 }
 
@@ -99,8 +108,6 @@ async function drawToCanvas(images) {
         center_width,
         center_height,
     );
-
-    console.log(center_width, center_height);
 }
 
 async function modifyText(movie) {
@@ -118,7 +125,9 @@ async function modifyText(movie) {
 }
 
 let images = await prepareImages(movies);
-console.log('loaded');
+const t3 = performance.now();
+
+console.log(`Images loaded in ${Math.floor(t3 - t2)}ms`);
 
 let index = 0;
 let sliceLength = 9;
