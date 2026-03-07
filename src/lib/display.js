@@ -129,8 +129,9 @@ const t3 = performance.now();
 
 console.log(`Images loaded in ${Math.floor(t3 - t2)}ms`);
 
-let index = 0;
 let sliceLength = 9;
+let index = images.length - Math.floor(sliceLength / 2) - 1;
+
 drawToCanvas(getSlice(images, index, sliceLength));
 modifyText(getSlice(movies, index, sliceLength)[Math.floor(sliceLength / 2)]);
 

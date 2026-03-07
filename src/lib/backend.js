@@ -1,4 +1,9 @@
-import { PhotonImage, SamplingFilter, resize } from '@cf-wasm/photon/workerd';
+import {
+    PhotonImage,
+    SamplingFilter,
+    resize,
+    sharpen,
+} from '@cf-wasm/photon/workerd';
 
 async function resizeImage(original) {
     let res = await original.arrayBuffer();
@@ -6,7 +11,9 @@ async function resizeImage(original) {
 
     const input = PhotonImage.new_from_byteslice(res);
 
-    const output = resize(input, 200, 300, SamplingFilter.Nearest);
+    let output = resize(input, 400, 600, SamplingFilter.Lanczos3);
+
+    sharpen(output);
 
     let outputBytes = output.get_bytes_webp();
     input.free();
